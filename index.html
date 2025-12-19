@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Ninho - Abreus Arts | Lançamento 22/12</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF1493 0%, #FFD700 50%, #0000FF 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animação de fundo */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg, 
+                #FF1493 0%,    /* Rosa forte */
+                #FFB6C1 5%,    /* Rosa suave */
+                #FF0000 10%,   /* Vermelho forte */
+                #FF6B6B 15%,   /* Vermelho suave */
+                #FF8C00 20%,   /* Laranja forte */
+                #FFB366 25%,   /* Laranja suave */
+                #FFD700 30%,   /* Amarelo forte */
+                #FFEB99 35%,   /* Amarelo suave */
+                #00FF00 40%,   /* Verde forte */
+                #90EE90 45%,   /* Verde suave */
+                #0000FF 50%,   /* Azul forte */
+                #87CEEB 55%,   /* Azul suave */
+                #4B0082 60%,   /* Índigo forte */
+                #9370DB 65%,   /* Índigo suave */
+                #8B00FF 70%,   /* Violeta forte */
+                #DDA0DD 75%,   /* Violeta suave */
+                #FF1493 80%,   /* Rosa forte novamente */
+                #FFB6C1 85%,   /* Rosa suave */
+                #FF0000 90%,   /* Vermelho forte */
+                #FF1493 100%   /* Volta ao rosa */
+            );
+            background-size: 400% 400%;
+            animation: gradient 25s ease infinite;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header com logo */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.2em;
+            letter-spacing: 4px;
+            font-weight: 300;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .album-cover {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            margin: 0 auto 30px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .album-cover:hover {
+            transform: scale(1.05);
+        }
+
+        .title {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #FFF;
+            margin: 20px 0 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 2em;
+            color: #FFF;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .artist {
+            font-size: 1.5em;
+            color: #FFF;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .genre {
+            font-size: 1.2em;
+            color: #FFF;
+            margin-bottom: 30px;
+            font-weight: 400;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 25px;
+            border-radius: 25px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Countdown */
+        .countdown-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .countdown-title {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #FFF;
+            display: block;
+        }
+
+        .countdown-label {
+            color: white;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        /* Botões de Plataforma */
+        .platforms {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .platform-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .spotify {
+            background: #1DB954;
+            color: white;
+        }
+
+        .youtube {
+            background: #FF0000;
+            color: white;
+        }
+
+        .ytmusic {
+            background: #FF0000;
+            color: white;
+        }
+
+        .facebook {
+            background: #1877F2;
+            color: white;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .tiktok {
+            background: #000000;
+            color: white;
+        }
+
+        /* Seção de Letra */
+        .lyrics-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .lyrics-title {
+            text-align: center;
+            color: #8B00FF;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .lyrics {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.1em;
+            white-space: pre-line;
+            margin-bottom: 30px;
+        }
+
+        .karaoke-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF1493, #8B00FF);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(139, 0, 255, 0.4);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .karaoke-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 0, 255, 0.6);
+        }
+
+        /* Credits */
+        .credits {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 600px;
+            color: white;
+            text-align: center;
+        }
+
+        .credits h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #FFF;
+        }
+
+        .credits p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .social-links {
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+
+        .social-links a {
+            color: #FFF;
+            text-decoration: none;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.5em;
+            }
+
+            .countdown-number {
+                font-size: 2em;
+            }
+
+            .lyrics-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Novo Sucesso da Música Sertaneja</div>
+        </div>
+
+        <div class="hero">
+            <img src="https://i.postimg.cc/KY9YNRkF/image.png" alt="Nosso Ninho" class="album-cover">
+            
+            <h1 class="title">NOSSO NINHO</h1>
+            <p class="subtitle">Quero ser um arco-íris na sua vida</p>
+            <p class="artist">Music by Sara Abreu</p>
+            <p class="genre">🎸 Sertanejo Romântico 💕</p>
+        </div>
+
+        <div class="countdown-section">
+            <h2 class="countdown-title">🎵 Lançamento Oficial</h2>
+            <div id="countdown" class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">0</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">0</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">0</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">0</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+            <p style="color: white; margin-top: 20px; font-size: 1.2em;">22 de Dezembro de 2025 às 13h</p>
+        </div>
+
+        <div class="platforms">
+            <a href="https://www.youtube.com/@abreusarts" target="_blank" class="platform-btn youtube">
+                <span style="font-size: 1.5em;">▶</span>
+                Assistir no YouTube
+            </a>
+            <a href="https://www.youtube.com/@abreusarts" target="_blank" class="platform-btn ytmusic">
+                <span style="font-size: 1.5em;">🎵</span>
+                Ouvir no YouTube Music
+            </a>
+            <a href="https://open.spotify.com/search/abreusarts" target="_blank" class="platform-btn spotify">
+                <span style="font-size: 1.5em;">♫</span>
+                Ouvir no Spotify
+            </a>
+            <a href="https://www.facebook.com/abreusarts" target="_blank" class="platform-btn facebook">
+                <span style="font-size: 1.5em;">f</span>
+                Seguir no Facebook
+            </a>
+            <a href="https://www.instagram.com/abreusarts" target="_blank" class="platform-btn instagram">
+                <span style="font-size: 1.5em;">📷</span>
+                Seguir no Instagram
+            </a>
+            <a href="https://www.tiktok.com/@abreusarts" target="_blank" class="platform-btn tiktok">
+                <span style="font-size: 1.5em;">♪</span>
+                Seguir no TikTok
+            </a>
+        </div>
+
+        <div class="lyrics-section">
+            <h2 class="lyrics-title">Letra da Música</h2>
+            <div class="lyrics">Quero ser um arco-íris na sua vida,
+Ser o melhor que eu puder,
+Pra te fazer feliz, mulher…
+
+A vida corre tanto,
+E às vezes me dá espanto...
+Mas com você tudo vira uma linda estrada,
+E eu te quero sendo sempre a mais amada.
+
+Pra sempre eu vou te amar,
+E Deus vai abençoar…
+
+Você é diferente,
+Envolvente,
+Beijo quente,
+Inteligente…
+
+Eu me perco fácil nesse seu jeitinho,
+Fica comigo, amor, que eu cuido do nosso ninho.
+
+A gente vive bem,
+Sem se comparar com ninguém.
+Cada um escreve a própria história,
+E a nossa vai ser cheia de vitória.
+
+Fica comigo, meu amor,
+Te protejo como quem cuida de uma flor…
+
+Você é diferente,
+Envolvente,
+Beijo quente,
+Inteligente…
+
+Eu me perco fácil nesse seu jeitinho,
+Fica comigo, amor, que eu cuido do nosso ninho.
+
+Não tenha medo, meu amor,
+Eu serei sempre o seu provedor.
+Seu corpo me enlouquece, me tira do eixo,
+Me faz sentir moleque só de ganhar seu beijo.
+
+Enquanto eu viver,
+Eu nunca vou te esquecer.
+
+Você é diferente…
+Envolvente…
+Beijo quente…
+Inteligente…
+
+Te amo mais a cada dia que amanhece,
+É você quem meu coração merece.</div>
+            <a href="https://www.youtube.com/@abreusarts" target="_blank" class="karaoke-btn">
+                🎤 Versão Karaokê
+            </a>
+        </div>
+
+        <div class="credits">
+            <h3>Ficha Técnica</h3>
+            <p><strong>Composição:</strong> Sara Abreu e Djalma de Abreu</p>
+            <p><strong>Melodia:</strong> Sara Abreu</p>
+            <p><strong>Produção:</strong> Abreus Arts</p>
+        </div>
+
+        <div class="footer">
+            <div class="social-links">
+                <p>Canal Oficial: <a href="https://www.youtube.com/@abreusarts" target="_blank">@abreusarts</a></p>
+                <p>Contato: <a href="mailto:abreusarts@gmail.com">abreusarts@gmail.com</a></p>
+            </div>
+            <p style="margin-top: 30px; opacity: 0.8;">© 2025 Abreus Arts. Todos os direitos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        const launchDate = new Date('2025-12-22T13:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<p style="color: white; font-size: 1.5em;">🎉 Disponível Agora! 🎉</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
